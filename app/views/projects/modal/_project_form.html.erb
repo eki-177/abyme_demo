@@ -1,24 +1,19 @@
 <%= simple_form_for project, remote: true do |f| %>
 
-	<%= f.container_for :title, class: 'field mb-4' do %>
+	<div class="field mb-4">
 		<%= f.label :title, class: 'block text-gray-700 text-sm font-bold mb-2' %>
 		<%= f.input :title, label: false, placeholder: 'Your project title',
-								input_html: { data: { action: 'keyup->projects#validation' },
-															class: 'form-input focus:outline-none focus:shadow-outline' } %>
+								input_html: { class: 'form-input focus:outline-none focus:shadow-outline' } %>
 
-		<%= f.error_for :title, class: 'text-red-700 error-feedback' %>
-	<% end %>
+	</div>
 	
-	<%= f.container_for :description, class: 'field mb-4' do %>
+	<div class="field mb-4">
 		<%= f.label :description, class: 'block text-gray-700 text-sm font-bold mb-2' %>
 		<%= f.input :description, label: false, 
 								placeholder: 'Quick description of your project',
-								input_html: { data: { action: 'keyup->projects#validation' },
-															class: 'form-input focus:outline-none 
-																			focus:shadow-outline h-32' } %>
+								input_html: { class: 'form-input focus:outline-none focus:shadow-outline h-32' } %>
 
-		<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
-	<% end %>	
+	</div>
 
 	<%= f.submit 'Create', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 <% end %>

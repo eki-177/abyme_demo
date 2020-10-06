@@ -2,21 +2,17 @@
 	<div class="full-height-wrapper p-8 text-gray-800 flex" data-controller="projects">
 		<div class="container bg-white p-8 w-1/3 mr-3 relative">
 
-			<%= f.container_for :title, class: 'field mb-4' do %>
+			<div class="field mb-4">
 				<%= f.input :title, label: false, placeholder: 'Title...',
-										input_html: { class: 'text-4xl font-bold mb-4 w-full',
-																	data: { action: 'keyup->projects#validation' } } %>
+										input_html: { class: 'text-4xl font-bold mb-4 w-full' } %>
 
-				<%= f.error_for :title, class: 'text-red-700 error-feedback' %>
-			<% end %>
+			</div>
 
-			<%= f.container_for :description, class: 'field mb-4' do %>
+			<div class="field mb-4">
 				<%= f.input :description, label: false, placeholder: 'Description...',
-										input_html: { class: 'w-full',
-																	data: { action: 'keyup->projects#validation' } } %>
+										input_html: { class: 'w-full' } %>
 
-				<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
-			<% end %>
+			</div>
 
 				<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 		</div>
