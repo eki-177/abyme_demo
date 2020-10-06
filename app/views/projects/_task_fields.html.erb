@@ -1,0 +1,35 @@
+<div class="border-solid border-2 rounded border-gray-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
+  <div class="flex align-center justify-between">
+    <div class="w-1/2 p-6">
+      <%= f.container_for :title, class: 'field mb-4' do %>
+        <%= f.input :title, 
+                    input_html: { class: 'text-4xl font-bold mb-4 w-full', data: { action: 'keyup->projects#validation' } }, 
+                    label: false,
+                    placeholder: 'Task title...' %>
+        
+        <%= f.error_for :title, class: 'text-red-700 error-feedback' %>
+      <% end %>
+
+      <%= f.container_for :description, class: 'field mb-4' do %>
+        <%= f.input :description, 
+                    input_html: { class: 'field mb-4 w-full', data: { action: 'keyup->projects#validation' } },
+                    label: false,
+                    placeholder: 'Task description...' %>
+                    
+          <%= f.error_for :description, class: 'text-red-700 error-feedback' %>
+      <% end %>
+
+      <%= f.hidden_field :_destroy %>
+      <small><%= abyme_remove_association('Remove Task') %></small>
+    </div>
+    <div class="w-1/2 border-solid border-2 rounded border-gray-300">
+      <%= abyme_for(:comments) do %>
+        <div class="p-4">
+          <%= abyme_records(f, :comments) %>
+          <%= abymize(f, Comment.new) %>
+          <%= abyme_add_association('+') %>
+        </div>
+			<% end %>
+    </div>
+  </div>
+</div>

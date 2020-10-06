@@ -1,0 +1,101 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+ 
+ html,
+ body {
+   min-height: 100%;
+ }
+ 
+ html,
+ body {
+   height: 100%;
+ }
+ 
+ .full-height-wrapper {
+   min-height: calc(100vh - 80px);
+ }
+ 
+ .bg-smoke-light {
+   background-color: rgba(0, 0, 0, 0.4);
+ }
+ 
+ .modal {
+   transition: opacity 0.1s ease-out;
+ }
+
+ form {
+	div.image-inputs {
+		position: relative;
+
+		input[type='file'] {
+			display: none;
+		}
+
+		label.file {
+			display: block;
+			width: 100%;
+			height: 10rem;
+			border-radius: 0.25rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+				0 1px 2px 0 rgba(0, 0, 0, 0.06);
+			background-color: #e2e8f0;
+			font-weight: 700;
+			cursor: pointer;
+			transition: all 0.2s ease-out;
+
+			&:hover {
+				background-color: #cbd5e0;
+			}
+		}
+
+		img[src=''] {
+			display: none;
+		}
+
+		#image-preview {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			cursor: pointer;
+			border-radius: 0.25rem;
+			transition: all 0.2s ease-out;
+
+			&:hover {
+				filter: brightness(70%);
+			}
+		}
+	}
+
+	textarea {
+		resize: none;
+		height: 14rem;
+		font-size: 1.125rem;
+	}
+
+	textarea:focus,
+	input:focus {
+		outline: none;
+	}
+}

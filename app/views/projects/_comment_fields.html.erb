@@ -1,0 +1,7 @@
+<%= f.input :content, 
+          input_html: { class: 'form-input-alt focus:outline-none focus:shadow-outline main-color text-white' },
+          placeholder: 'Your comment...',
+          label: false %>
+
+<%= f.hidden_field :_destroy %>
+<small><%= abyme_remove_association('Remove Comment') %></small>

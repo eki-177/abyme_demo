@@ -1,0 +1,15 @@
+<div class="full-height-wrapper p-8 text-gray-800">
+	<div class="container mx-auto bg-white p-8" data-controller="projects">
+	  <div class="projects-header flex items-center justify-between mb-5">
+	  	<h1 class="text-4xl font-bold">My Projects</h1>
+	  	<span data-action="click->projects#openModal" 
+	  				class="main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+	  			New Project
+	  	</span>
+	  </div>
+	  <div class="projects">
+	  	<%= render ProjectCardComponent.with_collection(@projects) %>
+	  </div>
+	  <%= render 'projects/modal/new_project_modal', project: @project %>
+	</div>
+</div>
