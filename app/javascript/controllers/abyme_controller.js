@@ -14,12 +14,13 @@ export default class extends Controller {
   add_association(event) {
     event.preventDefault();
 
+    console.log(this.templateTarget);
+
     const content = this.templateTarget.innerHTML.replace(
-      /NEW_RECORD/g,
+      /(NEW_RECORD)/g,
       new Date().getTime()
     );
 
-    console.log(this.position);
     this.associationsTarget.insertAdjacentHTML(this.position, content);
   }
 

@@ -15,10 +15,10 @@ RSpec.describe "Nested attributes behaviour" , type: :system do
       fill_in('project_title', with: "A project with two tasks")
       fill_in('project_description', with: "La mise en abyme — également orthographiée mise en abysme ou plus rarement mise en abîme1 — est un procédé consistant à représenter une œuvre dans une œuvre similaire, par exemple dans les phénomènes de « film dans un film », ou encore en incrustant dans une image cette image elle-même (en réduction).")
       click_on('Add Task')
-      within("div.project_tasks_title[data-children-count="1"]") do
-        fill_in('')
+      # within("div.project_tasks_title[data-children-count="1"]") do
+      #   fill_in('')
 
-      end
+      # end
       click_on('Save')
       expect(Project.last.title).to eq("A nice project")
     end
