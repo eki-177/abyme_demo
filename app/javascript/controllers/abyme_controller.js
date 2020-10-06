@@ -38,10 +38,3 @@ export default class extends Controller {
     wrapper.style.display = 'none';
   }
 }
-
-// const regexp = new RegExp(/(\[.+\]\[)(NEW_RECORD|(\d{12,}))(\]\[.+\]")/g);
-// const regexp = new RegExp(
-//   /(name=".+)(\[)([(^\[|NEW_RECORD)]+)(\]\[[^\[]+\])"/
-// );
-
-// console.log(this.templateTarget.innerHTML.replace(regexp, `$1$2HELLO$4`));
