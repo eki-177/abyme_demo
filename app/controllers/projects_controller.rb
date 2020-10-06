@@ -13,8 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge(user: current_user))
-    p @project.valid?
+    @project = Project.new(project_params)
   	@project.save ? redirect_to(projects_path) : render(:new)
   end
 
@@ -40,7 +39,7 @@ class ProjectsController < ApplicationController
 
   def project_params
   	params.require(:project).permit(
-      :title, :description, :thumbnail,
+      :title, :description,
       tasks_attributes: [
         :id, 
         :title, 

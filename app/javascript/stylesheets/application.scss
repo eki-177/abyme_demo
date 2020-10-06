@@ -1,0 +1,27 @@
+@import 'tailwindcss/base';
+.main-color {
+	@apply .bg-indigo-500;
+}
+
+.main-color-hover {
+	@apply .bg-indigo-700;
+}
+
+.main-btn {
+	@apply .main-color;
+}
+
+.main-btn:hover {
+	@apply .main-color-hover;
+}
+
+.form-input {
+	@apply .shadow .appearance-none .border .rounded .w-full .py-2 .px-3 .text-gray-700 .leading-tight .mb-1;
+}
+
+.form-input-alt {
+	@apply .shadow .appearance-none .border .rounded .w-full .py-2 .px-3 .text-white .leading-tight .mb-1;
+}
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+

@@ -1,13 +1,4 @@
 <%= simple_form_for project, remote: true do |f| %>
-	<%= f.container_for :thumbnail, class: 'field mb-4 image-inputs' do %>
-		<img src="" id="image-preview" 
-				 data-target="projects.imagePreview" data-action="click->projects#imageChange">
-		<%= f.label :thumbnail %>
-		<%= f.input :thumbnail, label: false, 
-								input_html: { data: { action: 'change->projects#imagePreview' } } %>
-
-		<%= f.error_for :thumbnail, class: 'text-red-700 error-feedback' %>
-	<% end %>
 
 	<%= f.container_for :title, class: 'field mb-4' do %>
 		<%= f.label :title, class: 'block text-gray-700 text-sm font-bold mb-2' %>

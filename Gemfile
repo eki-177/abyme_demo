@@ -24,8 +24,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'simple_form'
-gem "view_component"
+gem "view_component", require: "view_component/engine"
 gem 'font-awesome-sass', '~> 5.13.0'
+gem 'optimism'
 
 
 group :development, :test do

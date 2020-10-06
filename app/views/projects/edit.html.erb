@@ -1,15 +1,6 @@
 <%= simple_form_for @project do |f| %>
 	<div class="full-height-wrapper p-8 text-gray-800 flex" data-controller="projects">
 		<div class="container bg-white p-8 w-1/3 mr-3 relative">	
-			<%= f.container_for :thumbnail, class: 'field mb-4 image-inputs' do %>
-				<img src="<%= url_for(@project.thumbnail) if @project.thumbnail.attached? %>" id="image-preview" 
-						 data-target="projects.imagePreview" data-action="click->projects#imageChange">
-				<%= f.label :thumbnail, style: 'height: 20rem;' %>
-				<%= f.input :thumbnail, label: false,
-										input_html: { data: { action: 'change->projects#imagePreview' } } %>
-
-				<%= f.error_for :thumbnail, class: 'text-red-700 error-feedback' %>
-			<% end %>
 
 			<%= f.container_for :title, class: 'field mb-4' do %>
 				<%= f.input :title, label: false, placeholder: 'Title',

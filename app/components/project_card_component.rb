@@ -14,10 +14,6 @@ class ProjectCardComponent < ViewComponent::Base
   	project.description.truncate(500)
   end
 
-  def owner_email
-  	project.user.email
-  end
-
   def created_at
   	project.created_at.strftime('%A, %b %d')
   end
