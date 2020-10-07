@@ -1,7 +1,11 @@
-<%= f.input :content, 
-          input_html: { class: 'form-input-alt focus:outline-none focus:shadow-outline main-color text-white' },
-          placeholder: 'Your comment...',
-          label: false %>
+<div class="comment relative">
+  <%= f.input :content, 
+            input_html: { class: 'form-input-alt h-full focus:outline-none focus:shadow-outline main-color text-white' },
+            placeholder: 'Your comment...',
+            label: false %>
 
-<%= f.hidden_field :_destroy %>
-<small><%= abyme_remove_association(content: 'Remove Comment') %></small>
+  <%= f.hidden_field :_destroy %>
+  <%= abyme_remove_association(tag: :span) do %>
+    <span class="text-3xl text-white absolute cursor-pointer"  style="top: -6px; right: 10px;">x</span>
+  <% end %>
+</div>
