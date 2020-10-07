@@ -1,11 +1,15 @@
 module ApplicationHelper
 
-  def abymize(form, association, &block)
+  def abymize(form, association, options = {}, &block)
     content_tag(:div, data: { target: 'abyme.associations' }) do
       content_tag(:template, class: "abyme--#{formatize(association).singularize}_template", data: { target: 'abyme.template' }) do
         form.fields_for formatize(association), association, child_index: 'NEW_RECORD' do |f|
           content_tag(:div, class: 'abyme--fields') do
-            render("#{formatize(association).singularize}_fields", f: f)
+            if options[:partial]
+              render(options[:partial], f: f)
+            else
+              render("#{formatize(association).singularize}_fields", f: f)
+            end
           end
         end
       end
