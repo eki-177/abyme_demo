@@ -24,11 +24,11 @@ module ApplicationHelper
       records = records.order(options[:order])
 
       # GET INVALID RECORDS
-      # invalids = form.object.send(association).reject(&:persisted?)
+      invalids = form.object.send(association).reject(&:persisted?)
     
-      # if invalids.any?
-      #   records = records.to_a.concat(invalids)
-      # end
+      if invalids.any?
+        records = records.to_a.concat(invalids)
+      end
     end
 
     form.fields_for association, records do |f|
