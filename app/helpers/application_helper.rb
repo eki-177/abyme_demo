@@ -46,25 +46,26 @@ module ApplicationHelper
 
   def abyme_add_association(options = {}, &block)
     action = 'click->abyme#add_association'
-    options[:attributes] = {} if options[:attributes].nil?
     create_button(action, options, &block)
   end
 
   def abyme_remove_association(options = {}, &block)
     action = 'click->abyme#remove_association'
-    options[:attributes] = {} if options[:attributes].nil?
     create_button(action, options, &block)
   end
 
   private
 
   def create_button(action, options, &block)
+    options[:attributes] = {} if options[:attributes].nil?
+    options[:tag] = :button if options[:tag].nil?
+
     if block_given?
-      button_tag({data: { action: action }}.merge(options[:attributes])) do
+      content_tag(options[:tag], {data: { action: action }}.merge(options[:attributes])) do
         capture(&block)
       end
     else
-      button_tag(options[:content], {data: { action: action }}.merge(options[:attributes]))
+      content_tag(options[:tag], options[:content], {data: { action: action }}.merge(options[:attributes]))
     end
   end
 

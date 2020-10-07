@@ -20,7 +20,7 @@
 			<%= abyme_for(:tasks, :before) do %>
 				<%= abyme_records(f, :tasks, order: {created_at: :asc}) %>
 				<%= abymize(f, Task.new) %>
-				<%= abyme_add_association(content: 'Add Task', attributes: { class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer' }) %>
+				<%= abyme_add_association(content: 'add task', attributes: { class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer' }) %>
 			<% end %>
 		</div>
 	</div>
