@@ -44,12 +44,28 @@ module ApplicationHelper
     end
   end
 
-  def abyme_add_association(text, **options)
-    button_tag(text, { data: { action: 'click->abyme#add_association' } }.merge(options))
+  def abyme_add_association(options = {}, &block)
+    options[:attributes] = {} if options[:attributes].nil?
+
+    if block_given?
+      button_tag({data: { action: 'click->abyme#add_association' }}.merge(options[:attributes])) do
+        capture(&block)
+      end
+    else
+      button_tag(options[:content], {data: { action: 'click->abyme#add_association' }}.merge(options[:attributes]))
+    end
   end
 
-  def abyme_remove_association(text, **options)
-    button_tag(text, { data: { action: 'click->abyme#remove_association' } }.merge(options))
+  def abyme_remove_association(options = {}, &block)
+    options[:attributes] = {} if options[:attributes].nil?
+
+    if block_given?
+      button_tag({data: { action: 'click->abyme#remove_association' }}.merge(options[:attributes])) do
+        capture(&block)
+      end
+    else
+      button_tag(options[:content], {data: { action: 'click->abyme#remove_association' }}.merge(options[:attributes]))
+    end
   end
 
   def formatize(association)
