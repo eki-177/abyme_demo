@@ -44,7 +44,7 @@ RSpec.describe "Nested attributes behaviour" , type: :system do
   end
 
   context "Updating an existing project", js: true do
-    xit 'updates a project without any tasks' do
+    it 'updates a project without any tasks' do
       project = create(:project)
       visit edit_project_path(project)
       fill_in('project_title', with: "A rather small project")
