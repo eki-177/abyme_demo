@@ -32,8 +32,8 @@ RSpec.describe "Nested attributes behaviour", type: :system do
     end
   end
 
-  context "Updating an existing project" do
-    before(:each) { @project = create(:project) }
+  context "Adding tasks to an existing project" do
+    before(:all) { @project = create(:project) }
 
     it 'updates a project without any tasks', js: true do
       visit edit_project_path(@project)
@@ -52,7 +52,22 @@ RSpec.describe "Nested attributes behaviour", type: :system do
       expect(@project.tasks.count).to eq(3)
       expect(@project.comments.count).to eq(9)
     end
+  end
 
+  context "Removing tasks from an existing project" do
+    before(:context) do 
+      @project = create(:project)
+      3.times { |n| @project.tasks.create!(title: "task #{n}", description: "who cares") }
+    end
+
+    it 'updates a project by removing a task', js: true do
+      visit edit_project_path(@project)
+      find_all_by_id('i', "remove-task").last.click # Remove last task from page
+      click_on('Save')
+      @project.reload
+      expect(@project.tasks.count).to eq(2)
+      expect(@project.tasks.find_by(title: "task 3")).to be_nil
+    end
   end
 end
 
