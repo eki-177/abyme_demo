@@ -5,7 +5,6 @@ class Project < ApplicationRecord
   has_many :comments, through: :tasks
   
   abyme_for :tasks
-  # accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true
 
   validates :title, presence: true
   validates :description, presence: true
