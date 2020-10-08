@@ -7,6 +7,7 @@
 										input_html: { class: 'text-4xl font-bold mb-4 w-full' } %>
 				
 			</div>
+			
 			<div class="field mb-4">
 				<%= f.input :description, label: false, placeholder: 'Description...',
 										input_html: { class: 'w-full' } %>
@@ -17,7 +18,7 @@
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
 			<%= abyme_for(:tasks, :before) do %>
-				<%= abyme_records(f, :tasks, order: {created_at: :desc}) %>
+				<%= abyme_records(f, :tasks, order: {created_at: :asc}) %>
 				<%= abymize(f, Task.new) %>
 				<%= abyme_add_association('Add Task', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer') %>
 			<% end %>

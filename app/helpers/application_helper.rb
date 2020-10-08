@@ -22,14 +22,14 @@ module ApplicationHelper
 
     if options[:order].present?
       records = records.order(options[:order])
+
+      # GET INVALID RECORDS
+      invalids = form.object.send(association).reject(&:persisted?)
+    
+      if invalids.any?
+        records = records.to_a.concat(invalids)
+      end
     end
-    
-    # GET INVALID RECORDS
-    # invalids = form.object.send(association).reject(&:persisted?)
-    
-    # if invalids.any?
-    #   records = records.to_a.concat(invalids)
-    # end
 
     form.fields_for association, records do |f|
       content_tag(:div, class: 'abyme--fields') do

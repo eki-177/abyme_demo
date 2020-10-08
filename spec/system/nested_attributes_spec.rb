@@ -38,7 +38,6 @@ RSpec.describe "Nested attributes behaviour" , type: :system do
       add_comment_buttons.each {|b| 2.times { b.click } }
       comment_contents = find_all_by_id('input', /content/)
       comment_contents.each_with_index {|c, n| c.fill_in(with: "Comment ##{n}") }
-
       click_on('Save')
       expect(Project.last.comments.count).to eq(4)
     end

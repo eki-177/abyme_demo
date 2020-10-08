@@ -14,13 +14,20 @@ export default class extends Controller {
   add_association(event) {
     event.preventDefault();
 
-    const content = this.templateTarget.innerHTML.replace(
+    let html = this.templateTarget.innerHTML.replace(
       /NEW_RECORD/g,
       new Date().getTime()
     );
 
-    console.log(this.position);
-    this.associationsTarget.insertAdjacentHTML(this.position, content);
+    if (html.match(/<template[\s\S]+<\/template>/)) {
+      const template = html
+        .match(/<template[\s\S]+<\/template>/)[0]
+        .replace(/(\[\d+\])(\[[^\[\]]+\]"){1}/g, `[NEW_RECORD]$2`);
+
+      html = html.replace(/<template[\s\S]+<\/template>/g, template);
+    }
+
+    this.associationsTarget.insertAdjacentHTML(this.position, html);
   }
 
   remove_association(event) {
