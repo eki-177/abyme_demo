@@ -34,7 +34,7 @@ RSpec.describe "Nested attributes behaviour" , type: :system do
       titles.each_with_index {|title, n| title.fill_in(with: "Task #{n + 1}") }
       descriptions.each_with_index {|desc, n| desc.fill_in(with: "Small description for task number #{n + 1}") }
       # Comments
-      p add_comment_buttons = all('button', text: 'Add comment')
+      p add_comment_buttons = all('button', text: '+')
       add_comment_buttons.each {|b| 2.times { b.click } }
       comment_contents = find_all_by_id('input', /content/)
       comment_contents.each_with_index {|c, n| c.fill_in(with: "Comment ##{n}") }

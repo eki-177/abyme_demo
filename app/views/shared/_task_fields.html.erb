@@ -1,8 +1,7 @@
-<div class="border-solid border-2 rounded border-gray-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
+<div class="border-solid border-2 rounded border-blue-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
   <div class="flex align-center justify-between">
     <div class="w-1/2 p-6">
 	    <div class="field mb-4">
-
         <%= f.input :title, 
                     input_html: { class: 'text-4xl font-bold mb-4 w-full' }, 
                     label: false,
@@ -20,20 +19,14 @@
 
       <%= f.hidden_field :_destroy %>
 
-      <%= abyme_remove_association(tag: :div) do %>
-        <i class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
-      <% end %>
+      <small><%= abyme_remove_association(content: 'Remove Task') %></small>
     </div>
     <div class="w-1/2 border-solid border-2 rounded border-gray-300">
       <%= abyme_for(:comments, :before) do %>
         <div class="p-4">
           <%= abyme_records(f, :comments, order: {created_at: :asc}) %>
           <%= abymize(f, Comment.new) %>
-          <%= abyme_add_association(tag: :div) do %>
-            <div class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex justify-center leading-normal my-5 cursor-pointer">
-              <span class="text-2xl text-gray-400">+</span>
-            </div>
-          <% end %>
+          <%= abyme_add_association(content: '+') %>
         </div>
 			<% end %>
     </div>
