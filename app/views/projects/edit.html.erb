@@ -21,8 +21,8 @@
 				<%= abyme_records(f, :tasks, order: {created_at: :asc}) %>
 				<%= abymize(f, Task.new) %>
 
-				<%= abyme_add_association(tag: :div) do %>
-					<div class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex justify-center leading-normal p-8 my-5 cursor-pointer">
+				<%= abyme_add_association(tag: :a) do %>
+					<div id="add-task" class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex justify-center leading-normal p-8 my-5 cursor-pointer">
 						<span class="text-4xl text-gray-400">+</span>
 					</div>
 				<% end %>

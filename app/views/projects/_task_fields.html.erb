@@ -21,7 +21,7 @@
       <%= f.hidden_field :_destroy %>
 
       <%= abyme_remove_association(tag: :div) do %>
-        <i class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
+        <i id="remove-task" class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
       <% end %>
     </div>
     <div class="w-1/2 border-solid border-2 rounded border-gray-300">
@@ -30,7 +30,7 @@
           <%= abyme_records(f, :comments, order: {created_at: :asc}) %>
           <%= abymize(f, Comment.new) %>
           <%= abyme_add_association(tag: :div) do %>
-            <div class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex justify-center leading-normal my-5 cursor-pointer">
+            <div id="add-comment" class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex justify-center leading-normal my-5 cursor-pointer">
               <span class="text-2xl text-gray-400">+</span>
             </div>
           <% end %>
