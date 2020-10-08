@@ -1,3 +1,6 @@
+require 'abyme/view_helpers'
+require 'abyme/engine'
+
 module Abyme
-  autoload :Abymize, 'abyme/abymize'
+  autoload :Model, 'abyme/model'
 end

@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  include Abyme::Abymize
+  include Abyme::Model
   
   has_many :tasks, inverse_of: :project, dependent: :destroy
   has_many :comments, through: :tasks
