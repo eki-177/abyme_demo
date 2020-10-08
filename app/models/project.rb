@@ -1,9 +1,10 @@
 class Project < ApplicationRecord
+  include Abyme::Model
   
   has_many :tasks, inverse_of: :project, dependent: :destroy
   has_many :comments, through: :tasks
   
-  accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true
+  abyme_for :tasks
 
   validates :title, presence: true
   validates :description, presence: true
