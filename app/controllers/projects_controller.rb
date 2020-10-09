@@ -51,7 +51,8 @@ class ProjectsController < ApplicationController
           :content, 
           :_destroy
         ]
-      ]
+      ],
+      participants_attributes: [:id, :email, :_destroy]
     )
   end
 end
