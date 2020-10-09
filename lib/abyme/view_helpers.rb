@@ -1,7 +1,7 @@
 module Abyme
   module ViewHelpers
     def abymize(form, association, options = {}, &block)
-      content_tag(:div, data: { target: 'abyme.associations' }) do
+      content_tag(:div, data: { target: 'abyme.associations', abyme_position: options[:position] || :end }) do
         content_tag(:template, class: "abyme--#{formatize(association).singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for formatize(association), association, child_index: 'NEW_RECORD' do |f|
             content_tag(:div, class: 'abyme--fields') do
@@ -45,9 +45,16 @@ module Abyme
       end
     end
   
-    def abyme_for(association, position = :after, &block)
-      content_tag(:div, data: { controller: 'abyme', abyme_position: position }) do
-        capture(&block)
+    def abyme_for(association, form = nil, &block)
+      content_tag(:div, data: { controller: 'abyme' }) do
+        if block_given?
+          capture(&block)
+        else
+          model = association.to_s.singularize.classify.constantize
+          concat(abyme_records(form, association))
+          concat(abymize(form, model.new)) 
+          concat(abyme_add_association(content: "Add #{model}"))
+        end
       end
     end
   

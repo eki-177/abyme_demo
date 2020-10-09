@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   get position() {
-    return this.data.get('position') === 'before' ? 'beforeend' : 'afterbegin';
+    return this.associationsTarget.dataset.abymePosition === 'end' ? 'beforeend' : 'afterbegin';
   }
 
   add_association(event) {
