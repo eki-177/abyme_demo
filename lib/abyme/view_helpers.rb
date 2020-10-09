@@ -17,7 +17,6 @@ module Abyme
     end
   
     def abyme_records(form, association, options = { order: {} })
-  
       if options[:collection]
         records = options[:collection]
       else
@@ -37,7 +36,11 @@ module Abyme
   
       form.fields_for association, records do |f|
         content_tag(:div, class: 'abyme--fields') do
-          render("#{association.to_s.singularize}_fields", f: f)
+          if options[:partial]
+            render(options[:partial], f: f)
+          else
+            render("#{association.to_s.singularize}_fields", f: f)
+          end
         end
       end
     end
