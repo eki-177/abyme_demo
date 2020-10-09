@@ -53,7 +53,7 @@ module Abyme
           model = association.to_s.singularize.classify.constantize
           concat(abyme_records(association, form, options))
           concat(abyme_for(model.new, form, options)) 
-          concat(abyme_add_association(content: "Add #{model}"))
+          concat(abyme_add_association(content: options[:add_button] || "Add #{model}"))
         end
       end
     end
