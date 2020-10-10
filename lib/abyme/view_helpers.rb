@@ -7,13 +7,13 @@ module Abyme
         else
           model = association.to_s.singularize.classify.constantize
           concat(abyme_records(association, form, options))
-          concat(abyme_for(model.new, form, options)) 
+          concat(abyme_fields_for(model.new, form, options)) 
           concat(abyme_add_association(content: options[:add_button] || "Add #{model}"))
         end
       end
     end
 
-    def abyme_for(association, form, options = {}, &block)
+    def abyme_fields_for(association, form, options = {}, &block)
       content_tag(:div, data: { target: 'abyme.associations', model: formatize(association), abyme_position: options[:position] || :end }) do
         content_tag(:template, class: "abyme--#{formatize(association).singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for formatize(association), association, child_index: 'NEW_RECORD' do |f|
