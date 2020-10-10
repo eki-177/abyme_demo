@@ -21,7 +21,17 @@
 			</div>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
-			<%= abymize(:tasks, f) %>
+			<%= abymize(:tasks, f) do %>
+				<%= abyme_records(:tasks, f, order: {created_at: :asc}) %>
+				<%= abyme_for(Task.new, f, position: :start) %>
+
+				<%= abyme_add_association(tag: :a) do %>
+					<div id="add-task" class="border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex justify-center leading-normal p-8 my-5 cursor-pointer">
+						<span class="text-4xl text-gray-400">+</span>
+					</div>
+				<% end %>
+
+			<% end %>
 		</div>
 	</div>
 <% end %>

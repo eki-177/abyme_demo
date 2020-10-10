@@ -12,7 +12,7 @@ def fill_project_fields(title)
 end
 
 def add_comments(number = 2)
-  add_comment_buttons = all('div', id: "add-comment")
+  add_comment_buttons = all('button', text: 'Add Comment')
   add_comment_buttons.each {|b| number.times { b.click } }
   comment_contents = find_all_by_id('input', /content/)
   comment_contents.each_with_index {|c, n| c.fill_in(with: "Comment ##{n}") }

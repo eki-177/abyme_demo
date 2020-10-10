@@ -1,5 +1,18 @@
 module Abyme
   module ViewHelpers
+    def abymize(association, form = nil, options = {}, &block)
+      content_tag(:div, data: { controller: 'abyme' }) do
+        if block_given?
+          capture(&block)
+        else
+          model = association.to_s.singularize.classify.constantize
+          concat(abyme_records(association, form, options))
+          concat(abyme_for(model.new, form, options)) 
+          concat(abyme_add_association(content: options[:add_button] || "Add #{model}"))
+        end
+      end
+    end
+
     def abyme_for(association, form, options = {}, &block)
       content_tag(:div, data: { target: 'abyme.associations', model: formatize(association), abyme_position: options[:position] || :end }) do
         content_tag(:template, class: "abyme--#{formatize(association).singularize}_template", data: { target: 'abyme.template' }) do
@@ -41,19 +54,6 @@ module Abyme
           else
             render("#{association.to_s.singularize}_fields", f: f)
           end
-        end
-      end
-    end
-  
-    def abymize(association, form = nil, options = {}, &block)
-      content_tag(:div, data: { controller: 'abyme' }) do
-        if block_given?
-          capture(&block)
-        else
-          model = association.to_s.singularize.classify.constantize
-          concat(abyme_records(association, form, options))
-          concat(abyme_for(model.new, form, options)) 
-          concat(abyme_add_association(content: options[:add_button] || "Add #{model}"))
         end
       end
     end
