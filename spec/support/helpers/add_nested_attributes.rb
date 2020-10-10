@@ -12,8 +12,16 @@ def fill_project_fields(title)
 end
 
 def add_comments(number = 2)
-  add_comment_buttons = all('div', id: "add-comment")
+  add_comment_buttons = all('button', text: 'Add Comment')
   add_comment_buttons.each {|b| number.times { b.click } }
   comment_contents = find_all_by_id('input', /content/)
   comment_contents.each_with_index {|c, n| c.fill_in(with: "Comment ##{n}") }
+end
+
+def add_participants(number = 2)
+  number.times { click_on("Add Participant") }
+  within('div[data-model="participants"]') do
+    emails = all("input")
+    emails.each_with_index {|input, index| input.fill_in(with: "email_#{index}@gmail.com") }
+  end
 end

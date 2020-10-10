@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   get position() {
-    return this.data.get('position') === 'before' ? 'beforeend' : 'afterbegin';
+    return this.associationsTarget.dataset.abymePosition === 'end' ? 'beforeend' : 'afterbegin';
   }
 
   add_association(event) {
@@ -22,7 +22,7 @@ export default class extends Controller {
     if (html.match(/<template[\s\S]+<\/template>/)) {
       const template = html
         .match(/<template[\s\S]+<\/template>/)[0]
-        .replace(/(\[\d+\])(\[[^\[\]]+\]"){1}/g, `[NEW_RECORD]$2`);
+        .replace(/(\[\d{12,}\])(\[[^\[\]]+\]"){1}/g, `[NEW_RECORD]$2`);
 
       html = html.replace(/<template[\s\S]+<\/template>/g, template);
     }
