@@ -30,10 +30,19 @@ RSpec.describe "Nested attributes behaviour", type: :system do
       click_on('Save')
       expect(Project.last.comments.count).to eq(4)
     end
+
+    it "creates a project along with participants, using the #abyme_for method without any block/option", js: true do
+      visit new_project_path
+      fill_in('project_title', with: "Another project with two tasks")
+      fill_in('project_description', with: description)    
+      add_participants
+      click_on('Save')
+      expect(Project.last.participants.count).to eq(2)
+    end
   end
 
   context "Adding tasks to an existing project" do
-    before(:all) { @project = create(:project) }
+    before(:example) { @project = create(:project) }
 
     it 'updates a project without any tasks', js: true do
       visit edit_project_path(@project)
