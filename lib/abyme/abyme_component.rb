@@ -34,6 +34,7 @@ module Abyme
     private
 
     def render_association_partial(form)
+      # ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: form })
       ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: form })
     end
     
