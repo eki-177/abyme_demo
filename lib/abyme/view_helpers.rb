@@ -21,7 +21,7 @@ module Abyme
               if options[:partial]
                 render(options[:partial], f: f)
               elsif block_given?
-                # Here, f is the fields_for ; f.object becomes Task.new rather than original simple_form_for
+                # Here, f is the fields_for ; f.object becomes association.new rather than the original form.object
                 yield(f)
               else
                 render "shared/#{association.to_s.singularize}_fields", f: f
@@ -49,8 +49,7 @@ module Abyme
           records = records.to_a.concat(invalids)
         end
       end
-      # form.fields_for(association, records) do |f|
-      form.fields_for(association) do |f|
+      form.fields_for(association, records) do |f|
         content_tag(:div, class: 'abyme--fields') do
           if options[:partial]
             render(options[:partial], f: f)
@@ -86,10 +85,6 @@ module Abyme
       else
         content_tag(options[:tag], options[:content], {data: { action: action }}.merge(options[:attributes]))
       end
-    end
-  
-    def formatize(association)
-      association.class.name.tableize
     end
   end
 end
