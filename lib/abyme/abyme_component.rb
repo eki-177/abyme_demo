@@ -21,15 +21,15 @@ module Abyme
       end
     end
   
-    def add_association(options = {}, &block)
-      action = 'click->abyme#add_association'
-      create_button(action, options, &block)
-    end
+    # def add_association(options = {}, &block)
+    #   action = 'click->abyme#add_association'
+    #   create_button(action, options, &block)
+    # end
   
-    def remove_association(options = {}, &block)
-      action = 'click->abyme#remove_association'
-      create_button(action, options, &block)
-    end
+    # def remove_association(options = {}, &block)
+    #   action = 'click->abyme#remove_association'
+    #   create_button(action, options, &block)
+    # end
   
     private
 
@@ -56,6 +56,6 @@ module Abyme
     # def formatize(association)
     #   association.class.name.tableize
     # end
-    
+
   end
 end

@@ -74,6 +74,7 @@ module Abyme
     def create_button(action, options, &block)
       options[:attributes] ||= {}
       options[:tag] ||= :button
+      options[:content] ||= 'Add Association'
   
       if block_given?
         content_tag(options[:tag], {data: { action: action }}.merge(options[:attributes])) do
