@@ -26,7 +26,7 @@
 			<%#= abymize(:tasks, f) %>
 			
       <%# BLOCK VERSION %>
-			<%= abymize(:tasks, f) do |abyme| %>
+			<%= abymize do |abyme| %>
 				<%= abyme.records :tasks, f, partial: 'projects/fields/task_fields' %>
 				<%= abyme.new_record Task.new, f, partial: 'projects/fields/task_fields' %>
 				<%= abyme.add_association(tag: :a) do %>

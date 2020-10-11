@@ -1,6 +1,6 @@
 module Abyme
   module ViewHelpers
-    def abymize(association, form, options = {}, &block)
+    def abymize(association = nil, form = nil, options = {}, &block)
       content_tag(:div, data: { controller: 'abyme' }) do
         if block_given?
           yield(self)
