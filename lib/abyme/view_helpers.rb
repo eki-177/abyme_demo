@@ -18,9 +18,7 @@ module Abyme
         content_tag(:template, class: "abyme--#{association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for association, association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
             content_tag(:div, class: 'abyme--fields') do
-              if options[:partial]
-                render(options[:partial], f: f)
-              elsif block_given?
+              if block_given?
                 # Here, f is the fields_for ; f.object becomes association.new rather than the original form.object
                 yield(f)
               else
@@ -49,11 +47,10 @@ module Abyme
           records = records.to_a.concat(invalids)
         end
       end
+
       form.fields_for(association, records) do |f|
         content_tag(:div, class: 'abyme--fields') do
-          if options[:partial]
-            render(options[:partial], f: f)
-          elsif block_given?
+          if block_given?
             yield(f)
           else
             render "shared/#{association.to_s.singularize}_fields", f: f
@@ -71,12 +68,12 @@ module Abyme
       action = 'click->abyme#remove_association'
       create_button(action, options, &block)
     end
-  
+
     private
   
     def create_button(action, options, &block)
-      options[:attributes] = {} if options[:attributes].nil?
-      options[:tag] = :button if options[:tag].nil?
+      options[:attributes] ||= {}
+      options[:tag] ||= :button
   
       if block_given?
         content_tag(options[:tag], {data: { action: action }}.merge(options[:attributes])) do
