@@ -3,7 +3,7 @@ module Abyme
     def abymize(association = nil, form = nil, options = {}, &block)
       content_tag(:div, data: { controller: 'abyme' }) do
         if block_given?
-          yield(Abyme::AbymeComponent.new(association: association, form: form, lookup_context: self.lookup_context))
+          yield(Abyme::AbymeBuilder.new(association: association, form: form, lookup_context: self.lookup_context))
         else
           model = association.to_s.singularize.classify.constantize
           concat(persisted_records_for(association, form, options))

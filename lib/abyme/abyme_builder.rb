@@ -1,5 +1,5 @@
 module Abyme
-  class AbymeComponent < ActionView::Base
+  class AbymeBuilder < ActionView::Base
     include ActionView
 
     def initialize(association:, form:, lookup_context:, &block)
