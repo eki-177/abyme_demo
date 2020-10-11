@@ -3,7 +3,7 @@ module Abyme
     def abymize(association = nil, form = nil, options = {}, &block)
       content_tag(:div, data: { controller: 'abyme' }) do
         if block_given?
-          capture(&block)
+          yield(Abyme::AbymeComponent.new(association: association, form: form, lookup_context: self.lookup_context))
         else
           model = association.to_s.singularize.classify.constantize
           concat(persisted_records_for(association, form, options))
@@ -20,8 +20,10 @@ module Abyme
             content_tag(:div, class: 'abyme--fields') do
               if options[:partial]
                 render(options[:partial], f: f)
+              elsif block_given?
+                yield
               else
-                render("#{association.to_s.singularize}_fields", f: f)
+                render "shared/#{association.to_s.singularize}_fields", f: f
               end
             end
           end
@@ -35,24 +37,29 @@ module Abyme
       else
         records = form.object.send(association)
       end
-  
+
+      
       if options[:order].present?
         records = records.order(options[:order])
-  
+        
         # GET INVALID RECORDS
         invalids = form.object.send(association).reject(&:persisted?)
-      
+        
         if invalids.any?
           records = records.to_a.concat(invalids)
         end
       end
-  
-      form.fields_for association, records do |f|
+
+      
+      # form.fields_for(association, records) do |f|
+      form.fields_for(association) do |f|
         content_tag(:div, class: 'abyme--fields') do
           if options[:partial]
             render(options[:partial], f: f)
+          elsif block_given?
+            yield
           else
-            render("#{association.to_s.singularize}_fields", f: f)
+            render "shared/#{association.to_s.singularize}_fields", f: f
           end
         end
       end

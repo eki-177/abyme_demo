@@ -1,0 +1,7 @@
+<div class="field mb-4">
+  <%= f.input :email, input_html: { class: 'text-4xl font-bold mb-4 w-full' }, 
+                      label: false,
+                      placeholder: 'Email...' %>
+  <%= f.hidden_field :_destroy %>
+  <%= remove_association(content: 'remove participant') %>
+</div>

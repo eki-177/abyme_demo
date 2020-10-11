@@ -1,56 +1,23 @@
 module Abyme
   class AbymeComponent < ActionView::Base
+    include ActionView
 
-    def initialize(association:, form:, &block)
+    def initialize(association:, form:, lookup_context:, &block)
       @association = association
       @form = form
-      yield(self)
+      @lookup_context = lookup_context
+      yield(self) if block_given?
     end
   
-    def persisted_records_for(options = {})
-      if options[:collection]
-        records = options[:collection]
-      else
-        records = @form.object.send(@association)
-      end
-  
-      if options[:order].present?
-        records = records.order(options[:order])
-  
-        # GET INVALID RECORDS
-        invalids = @form.object.send(@association).reject(&:persisted?)
-      
-        if invalids.any?
-          records = records.to_a.concat(invalids)
-        end
-      end
-  
-      @form.fields_for @association, records do |f|
-        content_tag(:div, class: 'abyme--fields') do
-          if options[:partial]
-            # render(options[:partial], f: f)
-            ApplicationController.render(template: "shared/#{@association.to_s.singularize}_fields", locals: { f: f })
-          else
-            ApplicationController.render(template: "shared/#{@association.to_s.singularize}_fields", locals: { f: f })
-            # render("#{@association.to_s.singularize}_fields", f: f)
-          end
-        end
+    def persisted_records(options = {})
+      persisted_records_for(@association, @form, options) do
+        render_association_partial
       end
     end
     
-    def new_records_for(options = {}, &block)
-      content_tag(:div, data: { target: 'abyme.associations', model: @association, abyme_position: options[:position] || :end }) do
-        content_tag(:template, class: "abyme--#{@association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
-          @form.fields_for @association, @association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
-            content_tag(:div, class: 'abyme--fields') do
-              if options[:partial]
-                ApplicationController.render(template: "#{options[:partial]}", locals: { f: f })
-              else
-                ActionView::Template::HTML.new.render("#{@association.to_s.singularize}_fields", f: f)
-              end
-            end
-          end
-        end
+    def new_records(options = {}, &block)
+      new_records_for(@association, @form, options) do
+        render_association_partial
       end
     end
   
@@ -65,6 +32,11 @@ module Abyme
     end
   
     private
+
+    def render_association_partial
+      # render(@lookup_context).render("shared/#{@association.to_s.singularize}_fields", { locals: {f: @form} }, @lookup_context)
+      ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: @form })
+    end
     
     def create_button(action, options, &block)
       options[:attributes] = {} if options[:attributes].nil?
