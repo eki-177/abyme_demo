@@ -21,7 +21,6 @@
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
 			<%= abymize(:tasks, f) do |abyme| %>
-				<p><%#= abyme %></p>
         <%= abyme.persisted_records(order: {created_at: :asc}) %>
 				<%= abyme.new_records(position: :start) %>
 				<%= add_association(tag: :a) do %>

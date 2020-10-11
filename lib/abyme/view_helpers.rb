@@ -21,7 +21,8 @@ module Abyme
               if options[:partial]
                 render(options[:partial], f: f)
               elsif block_given?
-                yield
+                # Here, f is the fields_for ; f.object becomes Task.new rather than original simple_form_for
+                yield(f)
               else
                 render "shared/#{association.to_s.singularize}_fields", f: f
               end
@@ -37,7 +38,6 @@ module Abyme
       else
         records = form.object.send(association)
       end
-
       
       if options[:order].present?
         records = records.order(options[:order])
@@ -49,15 +49,13 @@ module Abyme
           records = records.to_a.concat(invalids)
         end
       end
-
-      
       # form.fields_for(association, records) do |f|
       form.fields_for(association) do |f|
         content_tag(:div, class: 'abyme--fields') do
           if options[:partial]
             render(options[:partial], f: f)
           elsif block_given?
-            yield
+            yield(f)
           else
             render "shared/#{association.to_s.singularize}_fields", f: f
           end

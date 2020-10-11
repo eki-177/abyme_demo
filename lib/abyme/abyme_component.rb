@@ -10,14 +10,14 @@ module Abyme
     end
   
     def persisted_records(options = {})
-      persisted_records_for(@association, @form, options) do
-        render_association_partial
+      persisted_records_for(@association, @form, options) do |form|
+        render_association_partial(form)
       end
     end
     
     def new_records(options = {}, &block)
-      new_records_for(@association, @form, options) do
-        render_association_partial
+      new_records_for(@association, @form, options) do |form|
+        render_association_partial(form)
       end
     end
   
@@ -33,9 +33,9 @@ module Abyme
   
     private
 
-    def render_association_partial
+    def render_association_partial(form)
       # render(@lookup_context).render("shared/#{@association.to_s.singularize}_fields", { locals: {f: @form} }, @lookup_context)
-      ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: @form })
+      ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: form })
     end
     
     def create_button(action, options, &block)
