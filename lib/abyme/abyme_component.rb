@@ -34,7 +34,6 @@ module Abyme
     private
 
     def render_association_partial(form)
-      # render(@lookup_context).render("shared/#{@association.to_s.singularize}_fields", { locals: {f: @form} }, @lookup_context)
       ActionController::Base.render(partial: "shared/#{@association.to_s.singularize}_fields", locals: { f: form })
     end
     
