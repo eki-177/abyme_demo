@@ -1,6 +1,6 @@
 import { Controller } from 'stimulus';
 
-export default class extends Controller {
+export class AbymeController extends Controller {
   static targets = ['template', 'associations'];
 
   connect() {
@@ -42,8 +42,18 @@ export default class extends Controller {
     this.dispatchEvent('abyme:before-after')
   }
 
-  dispatchEvent(type) {
-    const event = new CustomEvent(type, { detail: this })
-    this.element.dispatchEvent(event)
-  }
+  // dispatchEvent(type) {
+  //   const event = new CustomEvent(type, { detail: this })
+  //   this.element.dispatchEvent(event)
+
+  //   if (type === 'abyme:before-add') {
+  //     if (this.beforeAdd) this.beforeAdd(event)
+  //   } else if (type === 'abyme:after-add') {
+  //     if (this.afterAdd) this.afterAdd(event)
+  //   } else if (type === 'abyme:before-remove') {
+  //     if (this.beforeRemove) this.beforeRemove(event)
+  //   } else if (type === 'abyme:after-remove') {
+  //     if (this.afterRemove) this.afterRemove(event)
+  //   }
+  // }
 }
