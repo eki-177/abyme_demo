@@ -27,14 +27,23 @@ export default class extends Controller {
       html = html.replace(/<template[\s\S]+<\/template>/g, template);
     }
 
+    this.dispatchEvent('abyme:before-add')
     this.associationsTarget.insertAdjacentHTML(this.position, html);
+    this.dispatchEvent('abyme:after-add')
   }
 
   remove_association(event) {
     event.preventDefault();
 
+    this.dispatchEvent('abyme:before-remove')
     let wrapper = event.target.closest('.abyme--fields');
     wrapper.querySelector("input[name*='_destroy']").value = 1;
     wrapper.style.display = 'none';
+    this.dispatchEvent('abyme:before-after')
+  }
+
+  dispatchEvent(type) {
+    const event = new CustomEvent(type, { detail: this })
+    this.element.dispatchEvent(event)
   }
 }
