@@ -1,23 +1,24 @@
 module Abyme
   module ViewHelpers
-    def abymize(association = nil, form = nil, options = {}, &block)
-      content_tag(:div, data: { controller: 'abyme' }) do
+
+    def abymize(association, form, options = {}, &block)
+      content_tag(:div, data: { controller: 'abyme' }, id: "abyme--#{association}") do
         if block_given?
           yield(Abyme::AbymeBuilder.new(association: association, form: form, lookup_context: self.lookup_context))
         else
           model = association.to_s.singularize.classify.constantize
           concat(persisted_records_for(association, form, options))
           concat(new_records_for(association, form, options)) 
-          concat(add_association(content: options[:add_button] || "Add #{model}"))
+          concat(add_association(content: options[:add] || "Add #{model}"))
         end
       end
     end
 
     def new_records_for(association, form, options = {}, &block)
-      content_tag(:div, data: { target: 'abyme.associations', model: association, abyme_position: options[:position] || :end }) do
+      content_tag(:div, data: { target: 'abyme.associations', association: association, abyme_position: options[:position] || :end }) do
         content_tag(:template, class: "abyme--#{association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for association, association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
-            content_tag(:div, class: 'abyme--fields') do
+            content_tag(:div, basic_markup(options[:html])) do
               if block_given?
                 # Here, f is the fields_for ; f.object becomes association.new rather than the original form.object
                 yield(f)
@@ -49,7 +50,7 @@ module Abyme
       end
 
       form.fields_for(association, records) do |f|
-        content_tag(:div, class: 'abyme--fields') do
+        content_tag(:div, basic_markup(options[:html])) do
           if block_given?
             yield(f)
           else
@@ -72,17 +73,30 @@ module Abyme
     private
   
     def create_button(action, options, &block)
-      options[:attributes] ||= {}
+      options[:html] ||= {}
       options[:tag] ||= :button
       options[:content] ||= 'Add Association'
   
       if block_given?
-        content_tag(options[:tag], {data: { action: action }}.merge(options[:attributes])) do
+        content_tag(options[:tag], { data: { action: action } }.merge(options[:html])) do
           capture(&block)
         end
       else
-        content_tag(options[:tag], options[:content], {data: { action: action }}.merge(options[:attributes]))
+        content_tag(options[:tag], options[:content], { data: { action: action } }.merge(options[:html]))
       end
     end
+
+    def basic_markup(html)
+
+      if html && html[:class]
+        html[:class] = 'abyme--fields ' + html[:class]
+      else
+        html ||= {}
+        html[:class] = 'abyme--fields'
+      end
+
+      return html
+    end
+
   end
 end
