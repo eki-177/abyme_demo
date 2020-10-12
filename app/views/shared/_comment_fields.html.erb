@@ -5,7 +5,7 @@
             label: false %>
 
   <%= f.hidden_field :_destroy %>
-  <%= abyme_remove_association(tag: :span) do %>
+  <%= remove_association(tag: :span) do %>
     <span class="text-3xl text-white absolute cursor-pointer"  style="top: -6px; right: 10px;">x</span>
   <% end %>
 </div>
