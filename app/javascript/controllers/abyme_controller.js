@@ -1,6 +1,6 @@
 import { Controller } from 'stimulus';
 
-export class AbymeController extends Controller {
+export default class extends Controller {
   static targets = ['template', 'associations'];
 
   connect() {
@@ -27,33 +27,49 @@ export class AbymeController extends Controller {
       html = html.replace(/<template[\s\S]+<\/template>/g, template);
     }
 
-    this.dispatchEvent('abyme:before-add')
+    this.dispatch('abyme:before-add')
     this.associationsTarget.insertAdjacentHTML(this.position, html);
-    this.dispatchEvent('abyme:after-add')
+    this.dispatch('abyme:after-add')
   }
 
   remove_association(event) {
     event.preventDefault();
 
-    this.dispatchEvent('abyme:before-remove')
+    this.dispatch('abyme:before-remove')
     let wrapper = event.target.closest('.abyme--fields');
     wrapper.querySelector("input[name*='_destroy']").value = 1;
     wrapper.style.display = 'none';
-    this.dispatchEvent('abyme:before-after')
+    this.dispatch('abyme:before-after')
   }
 
-  // dispatchEvent(type) {
-  //   const event = new CustomEvent(type, { detail: this })
-  //   this.element.dispatchEvent(event)
+  dispatch(type) {
+    const event = new CustomEvent(type, { detail: this })
+    this.element.dispatchEvent(event)
 
-  //   if (type === 'abyme:before-add') {
-  //     if (this.beforeAdd) this.beforeAdd(event)
-  //   } else if (type === 'abyme:after-add') {
-  //     if (this.afterAdd) this.afterAdd(event)
-  //   } else if (type === 'abyme:before-remove') {
-  //     if (this.beforeRemove) this.beforeRemove(event)
-  //   } else if (type === 'abyme:after-remove') {
-  //     if (this.afterRemove) this.afterRemove(event)
-  //   }
-  // }
+    if (type === 'abyme:before-add') {
+      if (this.beforeAdd) this.abymeBeforeAdd(event)
+    } else if (type === 'abyme:after-add') {
+      if (this.afterAdd) this.abymeAfterAdd(event)
+    } else if (type === 'abyme:before-remove') {
+      if (this.beforeRemove) this.abymeBeforeRemove(event)
+    } else if (type === 'abyme:after-remove') {
+      if (this.afterRemove) this.abymeAfterRemove(event)
+    }
+  }
+
+  abymeBeforeAdd(event) {
+    console.log(event)
+  }
+
+  abymeAfterAdd(event) {
+    console.log(event)
+  }
+
+  abymeBeforeRevome(event) {
+    console.log(event)
+  }
+
+  abymeAfterRemove(event) {
+    console.log(event)
+  }
 }
