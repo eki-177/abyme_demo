@@ -19,12 +19,8 @@ module Abyme
         content_tag(:template, class: "abyme--#{association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for association, association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
             content_tag(:div, basic_markup(options[:html])) do
-              if block_given?
-                # Here, f is the fields_for ; f.object becomes association.new rather than the original form.object
-                yield(f)
-              else
-                render "shared/#{association.to_s.singularize}_fields", f: f
-              end
+              # Here, if a block is passed, we're passing the association fields to it, rather than the form itself
+              block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
             end
           end
         end
@@ -32,30 +28,18 @@ module Abyme
     end
   
     def persisted_records_for(association, form, options = {})
-      if options[:collection]
-        records = options[:collection]
-      else
-        records = form.object.send(association)
-      end
+      records = options[:collection] || form.object.send(association)
       
       if options[:order].present?
         records = records.order(options[:order])
-        
-        # GET INVALID RECORDS
+        # Get invalid records
         invalids = form.object.send(association).reject(&:persisted?)
-        
-        if invalids.any?
-          records = records.to_a.concat(invalids)
-        end
+        records = records.to_a.concat(invalids) if invalids.any?
       end
 
       form.fields_for(association, records) do |f|
         content_tag(:div, basic_markup(options[:html])) do
-          if block_given?
-            yield(f)
-          else
-            render "shared/#{association.to_s.singularize}_fields", f: f
-          end
+          block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
         end
       end
     end
@@ -87,16 +71,13 @@ module Abyme
     end
 
     def basic_markup(html)
-
       if html && html[:class]
         html[:class] = 'abyme--fields ' + html[:class]
       else
         html ||= {}
         html[:class] = 'abyme--fields'
       end
-
-      return html
+      html
     end
-
   end
 end
