@@ -39,7 +39,7 @@ export default class extends Controller {
     let wrapper = event.target.closest('.abyme--fields');
     wrapper.querySelector("input[name*='_destroy']").value = 1;
     wrapper.style.display = 'none';
-    this.dispatch('abyme:before-after')
+    this.dispatch('abyme:after-remove')
   }
 
   dispatch(type) {
@@ -47,13 +47,13 @@ export default class extends Controller {
     this.element.dispatchEvent(event)
 
     if (type === 'abyme:before-add') {
-      if (this.beforeAdd) this.abymeBeforeAdd(event)
+      if (this.abymeBeforeAdd) this.abymeBeforeAdd(event)
     } else if (type === 'abyme:after-add') {
-      if (this.afterAdd) this.abymeAfterAdd(event)
+      if (this.abymeAfterAdd) this.abymeAfterAdd(event)
     } else if (type === 'abyme:before-remove') {
-      if (this.beforeRemove) this.abymeBeforeRemove(event)
+      if (this.abymeBeforeRemove) this.abymeBeforeRemove(event)
     } else if (type === 'abyme:after-remove') {
-      if (this.afterRemove) this.abymeAfterRemove(event)
+      if (this.abymeAfterRemove) this.abymeAfterRemove(event)
     }
   }
 
@@ -65,7 +65,7 @@ export default class extends Controller {
     console.log(event)
   }
 
-  abymeBeforeRevome(event) {
+  abymeBeforeRemove(event) {
     console.log(event)
   }
 

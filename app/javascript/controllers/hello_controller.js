@@ -15,8 +15,4 @@ export default class extends Controller {
   connect() {
     this.outputTarget.textContent = 'Hello, Stimulus!'
   }
-
-  beforeAdd(event) {
-    console.log(event)
-  }
 }
