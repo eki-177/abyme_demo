@@ -27,9 +27,9 @@ export default class extends Controller {
       html = html.replace(/<template[\s\S]+<\/template>/g, template);
     }
 
-    this.create_event('before-add')
+    this.create_event('before-add', html)
     this.associationsTarget.insertAdjacentHTML(this.position, html);
-    this.create_event('after-add')
+    this.create_event('after-add', html)
   }
 
   remove_association(event) {
@@ -42,13 +42,14 @@ export default class extends Controller {
     this.create_event('after-remove')
   }
 
-  create_event(stage) {
-    const event = new CustomEvent(`abyme:${stage}`, { detail: this })
+  create_event(stage, html = null) {
+    const event = new CustomEvent(`abyme:${stage}`, { detail: {controller: this, content: html} })
     this.element.dispatchEvent(event)
     // WIP
     this.dispatch(event, stage)
   }
 
+  // WIP : Trying to integrate event handling through controller inheritance
   dispatch(event, stage) {
     if (stage === 'before-add' && this.abymeBeforeAdd) this.abymeBeforeAdd(event)
     if (stage === 'after-add' && this.abymeAfterAdd) this.abymeAfterAdd(event)
@@ -57,18 +58,14 @@ export default class extends Controller {
   }
 
   abymeBeforeAdd(event) {
-    // console.log(event)
   }
 
   abymeAfterAdd(event) {
-    // console.log(event)
   }
 
   abymeBeforeRemove(event) {
-    // console.log(event)
   }
 
   abymeAfterRemove(event) {
-    // console.log(event)
   }
 }
