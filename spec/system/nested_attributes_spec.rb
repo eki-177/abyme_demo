@@ -79,8 +79,3 @@ RSpec.describe "Nested attributes behaviour", type: :system do
     end
   end
 end
-
-
-def find_all_by_id(element, matcher)
-  all(element) {|el| el[:id].match? matcher }
-end

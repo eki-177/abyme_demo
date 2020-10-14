@@ -32,3 +32,7 @@ def add_participants(number = 2)
     emails.each_with_index {|input, index| input.fill_in(with: "email_#{index}@gmail.com") }
   end
 end
+
+def find_all_by_id(element, matcher)
+  all(element) {|el| el[:id].match? matcher }
+end
