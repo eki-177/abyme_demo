@@ -19,12 +19,21 @@ module Abyme
 
     def new_records_for(association, form, options = {}, &block)
       options[:wrapper_html] ||= {}
-      content_tag(:div, options[:wrapper_html].merge(
-        data: { target: 'abyme.associations', association: association, abyme_position: options[:position] || :end }
-        )) do
+
+      wrapper_default = { 
+        data: { 
+          target: 'abyme.associations', 
+          association: association, 
+          abyme_position: options[:position] || :end 
+        } 
+      }
+
+      fields_default = { data: { target: 'abyme.fields abyme.newFields' } }
+
+      content_tag(:div, build_attibutes(wrapper_default, options[:wrapper_html])) do
         content_tag(:template, class: "abyme--#{association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for association, association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
-            content_tag(:div, basic_fields_markup(options[:fields_html], association).merge(data: { target: 'abyme.fields abyme.newFields' })) do
+            content_tag(:div, build_attibutes(fields_default, basic_fields_markup(options[:fields_html], association))) do
               # Here, if a block is passed, we're passing the association fields to it, rather than the form itself
               block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
             end
@@ -87,6 +96,21 @@ module Abyme
         html[:class] = "abyme--fields #{association.to_s.singularize}-fields"
       end
       html
+    end
+
+    def build_attibutes(default, attr)
+      # ADD NEW DATA ATTRIBUTES VALUES TO THE DEFAULT ONES
+      default[:data].each do |key, value|
+        default[:data][key] = "#{value} #{attr[:data][key]}".strip if attr[:data]
+      end
+
+      # ADD NEW DATA ATTRIBUTES
+      if attr[:data]
+        default[:data] = default[:data].merge(attr[:data].reject { |key, _| default[:data][key] })
+      end
+
+      # MERGE THE DATA ATTRIBUTES TO THE HASH OF HTML ATTRIBUTES
+      default.merge(attr.reject { |key, _| key == :data })
     end
   end
 end
