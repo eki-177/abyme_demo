@@ -23,7 +23,7 @@
 			<%= abymize(:tasks, f, limit: 3, partial: 'projects/task_fields') do |abyme| %>
         <%= abyme.records(order: {created_at: :asc}) %>
 				<%= abyme.new_records(position: :end) %>
-				<%= add_association(content: 'Add task', html: { id: 'add-task' }) %>
+				<%= add_association(content: 'Add task', html: { id: 'add-task', class: 'border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-center items-center leading-normal p-8 my-5 cursor-pointer w-full focus:outline-none' }) %>
 			<% end %>
 		</div>
 	</div>
