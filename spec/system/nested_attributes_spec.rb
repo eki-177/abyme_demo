@@ -28,7 +28,7 @@ RSpec.describe "Nested attributes behaviour", type: :system do
       add_tasks
       add_comments
       click_on('Save')
-      expect(Project.last.comments.count).to eq(4)
+      expect(Project.last.comments.count).to eq(6)
     end
 
     it "creates a project along with participants, using the #abyme_for method without any block/option", js: true do
@@ -55,7 +55,7 @@ RSpec.describe "Nested attributes behaviour", type: :system do
     it 'updates a project by adding a few tasks', js: true do
       visit edit_project_path(@project)
       add_tasks(3)
-      add_comments(3)
+      add_comments(2)
       click_on('Save')
       @project.reload
       expect(@project.tasks.count).to eq(3)
@@ -79,6 +79,7 @@ RSpec.describe "Nested attributes behaviour", type: :system do
     end
   end
 end
+
 
 def find_all_by_id(element, matcher)
   all(element) {|el| el[:id].match? matcher }

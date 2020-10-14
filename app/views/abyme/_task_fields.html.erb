@@ -1,4 +1,4 @@
-<div class="default-partial border-solid border-2 rounded border-gray-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
+<div class="default-partial border-solid border-2 rounded border-blue-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
   <div class="flex align-center justify-between">
     <div class="w-1/2 p-6">
 	    <div class="field mb-4">
@@ -24,7 +24,7 @@
       <% end %>
     </div>
     <div class="w-1/2 border-solid border-2 rounded border-gray-300">
-      <%= abymize(:comments, f) %>
+      <%= abymize(:comments, f, min_count: 1) %>
     </div>
   </div>
 </div>

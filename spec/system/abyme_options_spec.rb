@@ -5,18 +5,15 @@ RSpec.describe "Helper options" do
       visit new_project_path
       add_tasks(1)
       element = page.find('.custom-partial')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
   
     it 'should set the correct partial when path not specified' do
       visit new_project_path
-      fill_in('project_title', with: "A project with two tasks")
-      fill_in('project_description', with: 'A project description')    
-      add_tasks(1)
-      click_on('Save')
-      visit edit_project_path(Project.last)
-      element = page.find('.default-partial')
-      expect(element).should_not be_nil
+      click_on('add participant')
+      within('#abyme--participants') do
+        expect(".abyme--fields").not_to be_nil
+      end
     end
   end
   
@@ -27,7 +24,7 @@ RSpec.describe "Helper options" do
       click_on('Save')
       save_and_open_page
       element = page.find('.error')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
   
     it 'should render error feedback for nested resources' do
@@ -39,7 +36,7 @@ RSpec.describe "Helper options" do
       click_on('Save')
       save_and_open_page
       element = page.find('.error')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
   end
 
@@ -47,35 +44,42 @@ RSpec.describe "Helper options" do
     it 'should create the correct id' do
       visit new_project_path
       element = page.find('#add-task')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
   
     it 'should create the correct classes' do 
       visit new_project_path
       click_on('add participant')
       element = page.find('.participant-fields')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
   
-    it 'should add the base class "abyme--fields"' do
+    it 'should add the base classes "abyme--fields" and "association-fields' do
       visit new_project_path
       click_on('add participant')
-      element = page.find('.abyme--fields')
-      expect(element).should_not be_nil
+      element = page.find('.abyme--fields.participant-fields')
+      expect(element).not_to be_nil
     end
   
     it 'should set the correct inner text for the add association button' do
       visit new_project_path
       element = page.find('button', text: 'add participant')
-      expect(element).should_not be_nil
+      expect(element).not_to be_nil
     end
 
     it 'should not create more than 3 tasks' do
       visit new_project_path
       4.times { click_on('Add task') }
       task_fields = []
-      within('#abyme--tasks') { task_fields = all('.abyme--fields') }
-      expect(task_fields.length).to eq(3)
+      within('#abyme--tasks') { expect(all('.task-fields').length).to eq(3) }
+    end
+    
+    it 'should display 1 default empty comment per task' do
+      visit new_project_path
+      click_on('Add task')
+      within('#abyme--comments') do
+        expect(find('.comment-fields')).not_to be_nil
+      end 
     end
   end
 end

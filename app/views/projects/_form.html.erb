@@ -20,9 +20,9 @@
 			</div>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
-			<%= abymize(:tasks, f, limit: 3) do |abyme| %>
+			<%= abymize(:tasks, f, limit: 3, partial: 'projects/task_fields') do |abyme| %>
         <%= abyme.records(order: {created_at: :asc}) %>
-				<%= abyme.new_records(position: :end, partial: 'projects/task_fields') %>
+				<%= abyme.new_records(position: :end) %>
 				<%= add_association(content: 'Add task', html: { id: 'add-task' }) %>
 			<% end %>
 		</div>

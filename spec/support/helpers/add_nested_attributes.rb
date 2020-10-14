@@ -1,5 +1,5 @@
 def add_tasks(number = 2)
-  number.times { find("div", id: "add-task").click }
+  number.times { find_by_id("add-task").click }
   titles = find_all_by_id('input', /project_tasks_attributes_\d*_title/)
   descriptions = find_all_by_id('textarea', /project_tasks_attributes_\d*_description/ )
   titles.each_with_index {|title, n| title.fill_in(with: "Task #{n + 1}") }
@@ -7,7 +7,7 @@ def add_tasks(number = 2)
 end
 
 def add_tasks_with_errors(number = 2)
-  number.times { find("div", id: "add-task").click }
+  number.times { find_by_id("add-task").click }
   titles = find_all_by_id('input', /project_tasks_attributes_\d*_title/)
   descriptions = find_all_by_id('textarea', /project_tasks_attributes_\d*_description/ )
   descriptions.each_with_index {|title, n| title.fill_in(with: "Small description for task number #{n + 1}") }
