@@ -35,6 +35,7 @@ module Abyme
   
     def persisted_records_for(association, form, options = {})
       records = options[:collection] || form.object.send(association)
+      options[:wrapper_html] ||= {}
       
       if options[:order].present?
         records = records.order(options[:order])
@@ -42,10 +43,12 @@ module Abyme
         invalids = form.object.send(association).reject(&:persisted?)
         records = records.to_a.concat(invalids) if invalids.any?
       end
-
-      form.fields_for(association, records) do |f|
-        content_tag(:div, basic_fields_markup(options[:html], association).merge(data: { target: 'abyme.fields' })) do
-          block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
+      
+      content_tag(:div, options[:wrapper_html]) do
+        form.fields_for(association, records) do |f|
+          content_tag(:div, basic_fields_markup(options[:fields_html], association).merge(data: { target: 'abyme.fields' })) do
+            block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
+          end
         end
       end
     end
