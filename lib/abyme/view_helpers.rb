@@ -99,12 +99,12 @@ module Abyme
     end
 
     def build_attibutes(default, attr)
-      # ADD NEW DATA ATTRIBUTES VALUES TO THE DEFAULT ONES
+      # ADD NEW DATA ATTRIBUTES VALUES TO THE DEFAULT ONES (ONLY VALUES)
       default[:data].each do |key, value|
         default[:data][key] = "#{value} #{attr[:data][key]}".strip if attr[:data]
       end
 
-      # ADD NEW DATA ATTRIBUTES
+      # ADD NEW DATA ATTRIBUTES (KEYS & VALUES)
       if attr[:data]
         default[:data] = default[:data].merge(attr[:data].reject { |key, _| default[:data][key] })
       end
