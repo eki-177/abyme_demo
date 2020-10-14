@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['template', 'associations', 'fields'];
+  static targets = ['template', 'associations', 'fields', 'newFields'];
 
   connect() {
     if (this.count) {
@@ -99,7 +99,7 @@ export default class extends Controller {
 
   // check if associations limit is reached
   limit_check() {
-    return (this.fieldsTargets
+    return (this.newFieldsTargets
                 .filter(item => !item.classList.contains('abyme--marked-for-destroy'))).length 
                 >= parseInt(this.element.dataset.limit)
   }
@@ -109,7 +109,6 @@ export default class extends Controller {
     let i = 0
     while (i < this.count) {
       this.add_association()
-      console.log("coucou")
       i++
       // Sleep function to ensure uniqueness of timestamp
       await this.sleep(1);
