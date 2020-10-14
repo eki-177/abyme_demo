@@ -80,34 +80,6 @@ RSpec.describe "Nested attributes behaviour", type: :system do
   end
 end
 
-RSpec.describe "HTML attributes for 'abyme-fields' & add/remove association", type: :system do
-  it 'should create the correct id' do
-    visit new_project_path
-    element = page.find('#add-task')
-    expect(element).should_not be_nil
-  end
-
-  it 'should create the correct classes' do 
-    visit new_project_path
-    click_on('add participant')
-    element = page.find('.participant-fields')
-    expect(element).should_not be_nil
-  end
-
-  it 'should add the base class "abyme--fields"' do
-    visit new_project_path
-    click_on('add participant')
-    element = page.find('.abyme--fields')
-    expect(element).should_not be_nil
-  end
-
-  it 'should set the correct inner text for the add association button' do
-    visit new_project_path
-    element = page.find('button', text: 'add participant')
-    expect(element).should_not be_nil
-  end
-end
-
 def find_all_by_id(element, matcher)
   all(element) {|el| el[:id].match? matcher }
 end
