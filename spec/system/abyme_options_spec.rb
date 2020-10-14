@@ -72,6 +72,12 @@ RSpec.describe "Helper options" do
       2.times { click_on('Add task') }
       expect(find_all('.test').length).to eq(2)
     end
+
+    it 'should allow data-attributes to be passed to the wrapper' do
+      visit new_project_path
+      click_on('Add task')
+      expect(find('.new-tasks[data-controller="tasks-wrapper"]')).not_to be_nil
+    end
   
     it 'should set the correct inner text for the add association button' do
       visit new_project_path
