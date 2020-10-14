@@ -2,7 +2,7 @@ module Abyme
   module ViewHelpers
 
     def abymize(association, form, options = {}, &block)
-      content_tag(:div, data: { controller: 'abyme' }, id: "abyme--#{association}") do
+      content_tag(:div, data: { controller: 'abyme', limit: options[:limit] }, id: "abyme--#{association}") do
         if block_given?
           yield(Abyme::AbymeBuilder.new(association: association, form: form, lookup_context: self.lookup_context))
         else
@@ -18,7 +18,7 @@ module Abyme
       content_tag(:div, data: { target: 'abyme.associations', association: association, abyme_position: options[:position] || :end }) do
         content_tag(:template, class: "abyme--#{association.to_s.singularize}_template", data: { target: 'abyme.template' }) do
           form.fields_for association, association.to_s.classify.constantize.new, child_index: 'NEW_RECORD' do |f|
-            content_tag(:div, basic_markup(options[:html])) do
+            content_tag(:div, basic_markup(options[:html]).merge(data: { target: 'abyme.fields' })) do
               # Here, if a block is passed, we're passing the association fields to it, rather than the form itself
               block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
             end
@@ -38,7 +38,7 @@ module Abyme
       end
 
       form.fields_for(association, records) do |f|
-        content_tag(:div, basic_markup(options[:html])) do
+        content_tag(:div, basic_markup(options[:html]).merge(data: { target: 'abyme.fields' })) do
           block_given? ? yield(f) : render("abyme/#{association.to_s.singularize}_fields", f: f)
         end
       end
