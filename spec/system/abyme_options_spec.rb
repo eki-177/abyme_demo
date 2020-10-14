@@ -4,7 +4,7 @@ RSpec.describe "Helper options" do
     it 'should set the correct partial when path specified' do
       visit new_project_path
       add_tasks(1)
-      element = page.find('.custom-partial')
+      element = find('.custom-partial')
       expect(element).not_to be_nil
     end
   
@@ -23,7 +23,7 @@ RSpec.describe "Helper options" do
       fill_in('project_description', with: 'A project description')
       click_on('Save')
       save_and_open_page
-      element = page.find('.error')
+      element = find('.error')
       expect(element).not_to be_nil
     end
   
@@ -35,7 +35,7 @@ RSpec.describe "Helper options" do
       add_tasks_with_errors(1)
       click_on('Save')
       save_and_open_page
-      element = page.find('.error')
+      element = find('.error')
       expect(element).not_to be_nil
     end
   end
@@ -43,27 +43,39 @@ RSpec.describe "Helper options" do
   describe "HTML attributes for 'abyme-fields' & add/remove association", type: :system do
     it 'should create the correct id' do
       visit new_project_path
-      element = page.find('#add-task')
+      element = find('#add-task')
       expect(element).not_to be_nil
     end
   
     it 'should create the correct classes' do 
       visit new_project_path
       click_on('add participant')
-      element = page.find('.participant-fields')
+      element = find('.participant-fields')
       expect(element).not_to be_nil
     end
   
     it 'should add the base classes "abyme--fields" and "association-fields' do
       visit new_project_path
       click_on('add participant')
-      element = page.find('.abyme--fields.participant-fields')
+      element = find('.abyme--fields.participant-fields')
       expect(element).not_to be_nil
+    end
+
+    it 'should allow HTML to be passed to the wrapper' do
+      visit new_project_path
+      click_on('Add task')
+      expect(find('.new-tasks')).not_to be_nil
+    end
+
+    it 'should allow HTML to be passed to each field' do
+      visit new_project_path
+      2.times { click_on('Add task') }
+      expect(find_all('.test').length).to eq(2)
     end
   
     it 'should set the correct inner text for the add association button' do
       visit new_project_path
-      element = page.find('button', text: 'add participant')
+      element = find('button', text: 'add participant')
       expect(element).not_to be_nil
     end
 

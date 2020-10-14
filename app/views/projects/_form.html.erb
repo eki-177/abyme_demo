@@ -10,19 +10,18 @@
 			<div class="field mb-4">
 				<%= f.input :description, label: false, placeholder: 'Description...',
 										input_html: { class: 'w-full' } %>
-
 			</div>
 
 			<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 
 			<div class="w-full p-6">
-				<%= abymize(:participants, f, add: 'add participant', html: { class: 'participant-fields' }) %>
+				<%= abymize(:participants, f, button_text: 'add participant', fields_html: { class: 'participant-fields' }) %>
 			</div>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
 			<%= abymize(:tasks, f, limit: 3, partial: 'projects/task_fields') do |abyme| %>
         <%= abyme.records(order: {created_at: :asc}) %>
-				<%= abyme.new_records(position: :end) %>
+				<%= abyme.new_records(position: :end, wrapper_html: {class: "new-tasks"}, fields_html: {class: "test"}) %>
 				<%= add_association(content: 'Add task', html: { id: 'add-task', class: 'border-solid border-2 rounded border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-center items-center leading-normal p-8 my-5 cursor-pointer w-full focus:outline-none' }) %>
 			<% end %>
 		</div>
