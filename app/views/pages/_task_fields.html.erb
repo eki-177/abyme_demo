@@ -14,7 +14,7 @@
         <h5 class="text-2xl text-gray-800">comments:</h5>
         <%= abyme.records %>
         <%= abyme.new_records(fields_html: { class: 'w-full' }) %>
-        <%= add_association(tag: :div, html: { class: 'focus:outline-none add-comment flex justify-center items-center border-dotted border-2 border-gray-400 mt-4 rounded' }) do %>
+        <%= add_association(tag: :div, html: { class: 'focus:outline-none add-comment flex justify-center items-center border-dotted border-2 border-gray-400 mt-4 rounded cursor-pointer' }) do %>
           <span class="text-4xl text-gray-800">+</span>
         <% end %>
       <% end %>
