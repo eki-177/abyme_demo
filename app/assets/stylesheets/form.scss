@@ -61,6 +61,42 @@ form {
 
   textarea:focus,
   input:focus {
-    outline: none;
+    outline: none !important;
+  }
+
+  #abyme--participants {
+    .remove-participant {
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      border-style: solid;
+      border-radius: 0.25rem;
+      border-width: 2px;
+      height: 40px;
+
+      &:focus {
+        outline: none !important;
+      }
+    }
+  }
+
+  #abyme--comments {
+    .comment {
+      margin-bottom: 5px;
+    }
+
+    button {
+      width: 100%;
+      border-style: solid;
+      border-radius: 0.25rem;
+      border-width: 2px;
+      height: 40px;
+
+      &:focus {
+        outline: none !important;
+      }
+    }
   }
 }
