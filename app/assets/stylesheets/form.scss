@@ -85,6 +85,15 @@ form {
   #abyme--comments {
     .comment {
       margin-bottom: 5px;
+
+      input {
+        height: 40px;
+
+        &:focus {
+          outline: 0px;
+          box-shadow: 0 0 0 3px rgba(66, 153, 225, 0) !important;
+        }
+      }
     }
 
     button {
