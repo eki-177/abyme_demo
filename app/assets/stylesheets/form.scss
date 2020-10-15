@@ -3,6 +3,7 @@ form {
     input,
     textarea {
       background-color: #fff5f5 !important;
+      border: 1px solid #e53e3e;
     }
 
     .error {
@@ -147,7 +148,7 @@ form {
         background-color: #7f9cf5;
 
         &::placeholder {
-          color: white;
+          color: #cbd5e0;
         }
 
         &:focus {

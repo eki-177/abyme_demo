@@ -1,0 +1,36 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.banner {
+  text-align: center;
+  h1 {
+    margin-top: 4rem;
+    font-size: 12rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+  }
+
+  p {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  a {
+    display: block;
+    font-size: 2rem;
+    color: #667eea;
+  }
+
+  .view-demo {
+    color: white;
+    padding: 20px 40px;
+    background-color: #667eea;
+    margin: 0 auto;
+    width: 400px;
+  }
+}
