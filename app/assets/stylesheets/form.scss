@@ -5,8 +5,14 @@ form {
     border-radius: 0.333rem;
   }
 
+  .main-btn {
+    height: 73px;
+  }
+
   button {
     font-weight: bolder;
+    color: #4a5568;
+    letter-spacing: 0.05rem;
   }
 
   div.image-inputs {
@@ -68,6 +74,18 @@ form {
     outline: none !important;
   }
 
+  .task-card {
+    box-shadow: 0px 1px 20px 0px rgba(59, 59, 59, 0.1);
+  }
+
+  #add-task {
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      background-color: #edf2f7;
+    }
+  }
+
   #abyme--participants {
     .remove-participant {
       cursor: pointer;
@@ -78,7 +96,7 @@ form {
       border-style: solid;
       border-radius: 0.25rem;
       border-width: 2px;
-      height: 40px;
+      height: 73px;
       transition: all 0.1s ease-out;
       border-color: #bee3f8;
 
