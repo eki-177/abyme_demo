@@ -1,17 +1,17 @@
-<div class="custom-partial border-solid border-2 rounded border-blue-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal p-8 my-5">
-  <div class="flex align-center justify-between">
+<div class="custom-partial border-solid border-grey-300 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal mb-5">
+  <div class="flex align-center justify-between task-card">
     <div class="w-1/2 p-6">
-	    <div class="field mb-4">
+	    <div class="field mb-2">
         <%= f.input :title, 
-                    input_html: { class: 'text-4xl font-bold mb-4 w-full' }, 
+                    input_html: { class: 'text-4xl font-bold mb-2 w-full' }, 
                     label: false,
                     placeholder: 'Task title...' %>
         
       </div>
 
-	    <div class="field mb-4">
+	    <div class="field mb-2">
         <%= f.input :description, 
-                    input_html: { class: 'field mb-4 w-full' },
+                    input_html: { class: 'field mb-2 w-full' },
                     label: false,
                     placeholder: 'Task description...' %>
                     
@@ -23,7 +23,7 @@
         <i id="remove-task" class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
       <% end %>
     </div>
-    <div class="w-1/2 border-solid border-2 rounded border-gray-300 p-2">
+    <div class="w-1/2 border-gray-300 comments-container bg-gray-200 p-4">
       <%= abymize(:comments, f, min_count: 1) %>
     </div>
   </div>
