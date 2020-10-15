@@ -3,6 +3,7 @@ form {
     input,
     textarea {
       background-color: #fff5f5 !important;
+      border: 1px solid #e53e3e;
     }
 
     .error {
@@ -29,6 +30,7 @@ form {
 
   .main-btn {
     height: 73px;
+    font-size: 2rem;
   }
 
   button {
@@ -146,7 +148,7 @@ form {
         background-color: #7f9cf5;
 
         &::placeholder {
-          color: white;
+          color: #cbd5e0;
         }
 
         &:focus {

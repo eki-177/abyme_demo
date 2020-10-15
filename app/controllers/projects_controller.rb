@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-  	@project.save ? redirect_to(projects_path) : render(:new)
+  	@project.save ? redirect_to(edit_project_path(@project)) : render(:new)
   end
 
   def edit
