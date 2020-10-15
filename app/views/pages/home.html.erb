@@ -1,0 +1,36 @@
+<div class="container mx-auto main-container mt-32">
+  <div class="banner text-center flex flex-col items-center justify-start">
+    <h1 class="title text-gray-800"><strong>abyme</strong></h1>
+    <p class="text-4xl text-gray-800">abyme is a modern take on handling dynamic nested forms in Rails 6+ using StimulusJS.</p>
+  </div>
+
+  <div class="demo-form mb-12">
+    <div class="mb-8">
+      <p class="text-2xl text-gray-800 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </div>
+    <%= simple_form_for Project.new do |f| %>
+      <div class="inner-form flex w-full mr-2">
+        <div class="main-fields w-1/2 h-full sticky">
+          <%= f.input :title, label: false, placeholder: 'Title',
+                              input_html: { class: 'text-4xl font-bold mb-4 w-full' } %>
+
+          <%= f.input :description, label: false, placeholder: 'Description',
+                      input_html: { class: 'text-4xl font-bold w-full mb-4' } %>
+
+          <%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
+        </div>
+
+        <div class="association-fields w-1/2 ml-2">
+          <%= abymize(:tasks, f, partial: 'pages/task_fields') do |abyme| %>
+            <%= abyme.new_records %>
+            <%= add_association(tag: :div) do %>
+              <div class="add-task-btn flex justify-center items-center rounded border-dotted border-2 border-gray-600">
+                +
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

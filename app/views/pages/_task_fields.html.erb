@@ -1,0 +1,23 @@
+<div class="task-n-comments">
+  <div class="task-fields">
+    <%= f.input :description, label: false, placeholder: 'Write your awesome task...',
+                              input_html: { class: 'text-4xl font-bold mb-4 w-full description-text' } %>
+
+    <%= f.hidden_field :_destroy %>
+
+    <%= remove_association(tag: :div, html: { class: 'remove-task' }) do %>
+      <i id="remove-task" class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
+    <% end %>
+
+    <div class="comments-list bg-gray-200 p-6 mb-12">
+      <%= abymize(:comments, f) do |abyme| %>
+        <h5 class="text-2xl text-gray-800">comments:</h5>
+        <%= abyme.records %>
+        <%= abyme.new_records(fields_html: { class: 'w-full' }) %>
+        <%= add_association(tag: :div, html: { class: 'focus:outline-none add-comment flex justify-center items-center border-dotted border-2 border-gray-400 mt-4 rounded' }) do %>
+          <span class="text-4xl text-gray-800">+</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 <div class="comment relative">
   <%= f.input :content, 
-            input_html: { class: 'form-input-alt h-full focus:outline-none focus:shadow-outline main-color text-white' },
-            placeholder: 'Your comment...',
+            input_html: { class: 'form-input-alt h-full focus:outline-none focus:shadow-outline main-color text-white py-2 px-4' },
+            placeholder: 'Add a comment here...',
             label: false %>
 
   <%= f.hidden_field :_destroy %>
   <%= remove_association(tag: :span) do %>
-    <span class="text-3xl text-white absolute cursor-pointer"  style="top: -6px; right: 10px;">x</span>
+    <span class="text-2xl text-white absolute cursor-pointer"  style="top: -2px; right: 10px;">x</span>
   <% end %>
 </div>

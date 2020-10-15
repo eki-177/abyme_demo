@@ -1,0 +1,76 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.banner {
+  height: 60vh;
+}
+
+.main-fields,
+.association-fields {
+  min-height: 300px;
+}
+
+.demo-form {
+  .main-fields {
+    top: 20px;
+
+    .main-btn {
+      height: 50px;
+    }
+  }
+
+  #abyme--tasks {
+    min-height: 300px;
+  }
+
+  .add-task-btn {
+    height: 295px;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    font-size: 3rem;
+    transition: all 0.1s ease-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #edf2f7;
+    }
+  }
+
+  .description-text {
+    height: 295px;
+  }
+
+  .task-fields {
+    position: relative;
+
+    textarea {
+      margin: 0px;
+    }
+
+    .remove-task {
+      position: absolute;
+      bottom: 35px;
+      left: 15px;
+    }
+
+    .comments-list {
+      position: relative;
+      width: 100%;
+
+      .comment {
+        margin-top: 5px;
+      }
+
+      .add-comment {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .comment-fields {
+    input::placeholder {
+      color: #e2e8f0;
+    }
+  }
+}
