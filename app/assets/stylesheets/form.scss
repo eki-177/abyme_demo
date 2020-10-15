@@ -3,6 +3,17 @@ form {
   textarea {
     padding: 10px;
     border-radius: 0.333rem;
+    color: #2d3748;
+  }
+
+  .project-details {
+    box-shadow: inset 0px 1px 20px 0px rgba(59, 59, 59, 0.1);
+
+    input[type='text'],
+    textarea {
+      background-color: #ebf8ff;
+      box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.03);
+    }
   }
 
   .main-btn {
