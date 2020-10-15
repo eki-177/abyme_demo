@@ -1,4 +1,15 @@
 form {
+  .field_with_errors {
+    input,
+    textarea {
+      background-color: #fff5f5 !important;
+    }
+
+    .error {
+      color: #fc8181;
+    }
+  }
+
   input,
   textarea {
     padding: 10px;
@@ -127,6 +138,11 @@ form {
 
       input {
         height: 40px;
+        background-color: #7f9cf5;
+
+        &::placeholder {
+          color: white;
+        }
 
         &:focus {
           outline: 0px;
