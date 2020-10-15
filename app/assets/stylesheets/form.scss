@@ -5,6 +5,10 @@ form {
     border-radius: 0.333rem;
   }
 
+  button {
+    font-weight: bolder;
+  }
+
   div.image-inputs {
     position: relative;
 
@@ -75,6 +79,12 @@ form {
       border-radius: 0.25rem;
       border-width: 2px;
       height: 40px;
+      transition: all 0.1s ease-out;
+      border-color: #bee3f8;
+
+      &:hover {
+        background-color: #bee3f8;
+      }
 
       &:focus {
         outline: none !important;
@@ -102,6 +112,11 @@ form {
       border-radius: 0.25rem;
       border-width: 2px;
       height: 40px;
+      transition: all 0.1s ease-out;
+
+      &:hover {
+        background-color: #e2e8f0;
+      }
 
       &:focus {
         outline: none !important;

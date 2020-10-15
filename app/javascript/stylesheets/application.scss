@@ -33,5 +33,10 @@
   //   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0) !important;
   // }
 }
+
+.border-1 {
+  border-width: 1px;
+}
+
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
