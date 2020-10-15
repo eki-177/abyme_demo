@@ -1,7 +1,11 @@
+PATH
+  remote: ../abyme
+  specs:
+    abyme (0.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    abyme (0.2.3)
     actioncable (6.0.3.3)
       actionpack (= 6.0.3.3)
       nio4r (~> 2.0)
@@ -239,7 +243,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  abyme
+  abyme!
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
