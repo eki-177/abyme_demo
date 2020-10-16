@@ -2,7 +2,18 @@ module Abyme
   module ViewHelpers
 
     def abymize(association, form, options = {}, &block)
-      content_tag(:div, data: { controller: 'abyme', limit: options[:limit], min_count: options[:min_count] }, id: "abyme--#{association}") do
+      options[:wrapper_html] ||= {}
+
+      wrapper_default = { 
+        data: { 
+          controller: 'abyme', 
+          limit: options[:limit], 
+          min_count: options[:min_count] 
+        },
+        id: "abyme--#{association}" 
+      }
+
+      content_tag(:div, build_attributes(wrapper_default, options[:wrapper_html])) do
         if block_given?
           yield(Abyme::AbymeBuilder.new(
             association: association, form: form, lookup_context: self.lookup_context, partial: options[:partial]
