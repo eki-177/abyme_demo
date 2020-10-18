@@ -1,24 +1,6 @@
-# README
+## Abyme Demo app
+This is the demo application for showcasing the [abyme gem](https://github.com/bear-in-mind/abyme).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You can clone it and start checking out our use of the gem with different options.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Don't forget to `bundle` and `yarn` !
