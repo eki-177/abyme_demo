@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Nested attributes behaviour", type: :system do
+  before do
+    driven_by :selenium_chrome_headless
+  end
   let(:description) { "La mise en abyme — également orthographiée mise en abysme ou plus rarement mise en abîme1 — est un procédé consistant à représenter une œuvre dans une œuvre similaire, par exemple dans les phénomènes de « film dans un film », ou encore en incrustant dans une image cette image elle-même (en réduction)." }
   context "Creating a brand new project" do
     it 'creates a project without any tasks' do
@@ -52,7 +55,7 @@ RSpec.describe "Nested attributes behaviour", type: :system do
       expect(@project.title).to eq('A rather small project')
     end
 
-    it 'updates a project by adding a few tasks', js: true do
+    xit 'updates a project by adding a few tasks', js: true do
       visit edit_project_path(@project)
       add_tasks(3)
       add_comments(2)

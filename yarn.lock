@@ -1124,6 +1124,13 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
+abyme@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/abyme/-/abyme-0.2.0.tgz#e95f850eb4a306d0d683e9c6d674fc905052bc92"
+  integrity sha512-n50bmS5wrWUAE902vm2y1tlowuPSJfDAC6bQBenwd/fE/LmKpgNehbwDl58PRVnNmVkv8wHgHoi0CVGCdoK4MQ==
+  dependencies:
+    stimulus "^1.1.1"
+
 accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"

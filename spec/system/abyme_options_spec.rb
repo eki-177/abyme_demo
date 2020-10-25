@@ -1,5 +1,9 @@
 require "rails_helper"
 RSpec.describe "Helper options" do
+  before do
+    driven_by :selenium_chrome_headless
+  end
+  
   context 'For new resources' do
     describe "Partials default & custom path", type: :system do
       it 'should set the correct partial when path specified' do
