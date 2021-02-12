@@ -19,12 +19,12 @@
 
       <%= f.hidden_field :_destroy %>
 
-      <%= remove_association(tag: :div) do %>
+      <%= remove_associated_record(tag: :div) do %>
         <i id="remove-task" class="fas fa-trash text-4xl text-gray-400 hover:text-grey-800 cursor-pointer"></i>
       <% end %>
     </div>
     <div class="w-1/2 border-gray-300 comments-container bg-gray-200 p-4">
-      <%= abymize(:comments, f, min_count: 1) %>
+      <%= f.abyme_for(:comments, min_count: 1) %>
     </div>
   </div>
 </div>
